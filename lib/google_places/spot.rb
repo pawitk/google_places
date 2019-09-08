@@ -138,7 +138,7 @@ module GooglePlaces
 
       options = {
         :locationbias => rect.format,
-        :inputtype => 'textquery'
+        :inputtype => 'textquery',
         :key => api_key,
         :retry_options => retry_options
       }
