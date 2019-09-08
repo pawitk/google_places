@@ -410,7 +410,7 @@ module GooglePlaces
             yield(result)
           end
         end
-        if response['candidates'].nil?
+        if !response['candidates'].nil?
           response['candidates'].each do |result|
             if !multipage_request && !response["next_page_token"].nil? && result == response['candidates'].last
               # add next page token on the last result
