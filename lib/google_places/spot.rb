@@ -400,6 +400,7 @@ module GooglePlaces
     def self.multi_pages_request(method, multipage_request, options)
       begin
         response = Request.send(method, options)
+        puts response
         if !response['results'].nil?
           response['results'].each do |result|
             if !multipage_request && !response["next_page_token"].nil? && result == response['results'].last
