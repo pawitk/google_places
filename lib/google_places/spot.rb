@@ -137,7 +137,7 @@ module GooglePlaces
 
 
       options = {
-        :bounds => rect.format,
+        :locationbias => rect.format,
         :key => api_key,
         :language => language,
         :retry_options => retry_options

@@ -7,7 +7,7 @@ module GooglePlaces
     end
 
     def format
-      [ @start_point.join(','), @end_point.join(',') ].join('|')
+      'rectangle:' + [ @start_point.join(','), @end_point.join(',') ].join('|')
     end
   end
 end
