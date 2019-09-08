@@ -139,6 +139,7 @@ module GooglePlaces
       options = {
         :locationbias => rect.format,
         :inputtype => 'textquery',
+        :field => 'formatted_address,geometry,icon,id,name,opening_hours,photos,place_id,plus_code,rating,reference,types,user_ratings_total'
         :key => api_key,
         :retry_options => retry_options
       }
@@ -399,12 +400,23 @@ module GooglePlaces
     def self.multi_pages_request(method, multipage_request, options)
       begin
         response = Request.send(method, options)
-        response['results'].each do |result|
-          if !multipage_request && !response["next_page_token"].nil? && result == response['results'].last
-            # add next page token on the last result
-            result.merge!("nextpagetoken" => response["next_page_token"])
+        if !response['results'].nil?
+          response['results'].each do |result|
+            if !multipage_request && !response["next_page_token"].nil? && result == response['results'].last
+              # add next page token on the last result
+              result.merge!("nextpagetoken" => response["next_page_token"])
+            end
+            yield(result)
           end
-          yield(result)
+        end
+        if response['candidates'].nil?
+          response['candidates'].each do |result|
+            if !multipage_request && !response["next_page_token"].nil? && result == response['candidates'].last
+              # add next page token on the last result
+              result.merge!("nextpagetoken" => response["next_page_token"])
+            end
+            yield(result)
+          end
         end
 
         # request the next page if presence of a "next_page" token
