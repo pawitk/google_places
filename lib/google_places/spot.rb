@@ -138,8 +138,8 @@ module GooglePlaces
 
       options = {
         :locationbias => rect.format,
+        :inputtype => 'textquery'
         :key => api_key,
-        :language => language,
         :retry_options => retry_options
       }
 
@@ -148,7 +148,7 @@ module GooglePlaces
       # Accept Types as a string or array
       if query
         query = (query.is_a?(Array) ? query.join('|') : query)
-        options.merge!(:query => query)
+        options.merge!(:input => query)
       end
 
       request(:spots_by_bounds, multipage_request, exclude, options)
