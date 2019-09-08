@@ -139,7 +139,7 @@ module GooglePlaces
       options = {
         :locationbias => rect.format,
         :inputtype => 'textquery',
-        :field => 'formatted_address,geometry,icon,id,name,opening_hours,photos,place_id,plus_code,rating,reference,types,user_ratings_total',
+        :fields => 'formatted_address,geometry,icon,id,name,opening_hours,photos,place_id,plus_code,rating,reference,types,user_ratings_total',
         :key => api_key,
         :retry_options => retry_options
       }
